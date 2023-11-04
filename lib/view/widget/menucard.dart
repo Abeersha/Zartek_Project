@@ -92,10 +92,10 @@ class Menulist extends StatelessWidget {
                     ),
                   ),
 
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      AddCart(),
+                      AddCart(dishes[index]),
                     ],
                   ),
                   Padding(

@@ -8,7 +8,8 @@ class LoginButton extends StatelessWidget {
   final Color textColor;
   final Color iconColor;
 
-  const LoginButton({super.key, 
+  const LoginButton({
+    super.key,
     required this.buttonText,
     required this.iconImage,
     required this.onPressed,
@@ -19,7 +20,8 @@ class LoginButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(onTap: onPressed,
+    return GestureDetector(
+      onTap: onPressed,
       child: Container(
         height: 50,
         width: 250,

@@ -1,15 +1,15 @@
-
 import 'package:flutter/material.dart';
 
-class PlaceOrderTile extends StatelessWidget {
-  const PlaceOrderTile({super.key});
 
+class PlaceOrderTile extends StatelessWidget {
+  const PlaceOrderTile(this.onTap, {super.key});
+  final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         GestureDetector(
-          onTap: () {},
+          onTap: onTap,
           child: Container(
             height: 50,
             width: MediaQuery.of(context).size.width,

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:zartek_project/controller/menucontroller.dart';
+import 'package:zartek_project/model%20/foodmenu.dart';
 
+// ignore: must_be_immutable
 class AddCart extends StatelessWidget {
-  const AddCart({super.key});
-
+  AddCart(this.item, {super.key});
+  CategoryDish item;
   @override
   Widget build(BuildContext context) {
     final FoodMenuController menuController = Get.put(FoodMenuController());
@@ -23,7 +25,7 @@ class AddCart extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 10),
               child: GestureDetector(
                 onTap: () => menuController.cartCount(
-                    menuController.cartCounter.value, '-'),
+                    menuController.cartCounter.value, '-', item),
                 child: const Text(
                   '_',
                   style: TextStyle(
@@ -46,7 +48,7 @@ class AddCart extends StatelessWidget {
             ),
             GestureDetector(
                 onTap: () => menuController.cartCount(
-                    menuController.cartCounter.value, '+'),
+                    menuController.cartCounter.value, '+', item),
                 child: const Text(
                   '+',
                   style: TextStyle(

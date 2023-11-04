@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:zartek_project/model%20/foodmenu.dart';
 import 'package:zartek_project/view/widget/addtocart.dart';
 
-// ignore: camel_case_types
+// ignore: camel_case_types, must_be_immutable
 class carttile extends StatelessWidget {
-  const carttile({
+  carttile(
+    this.cartdishes, {
     super.key,
   });
-
+  CategoryDish cartdishes;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -42,33 +44,34 @@ class carttile extends StatelessWidget {
             // height: 150,
             width: 100,
             color: Colors.white,
-            child: const Column(
+            child: Column(
               children: [
                 Text(
-                  'Gobi Manchurian Dry',
-                  style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                  cartdishes.dishName,
+                  style: const TextStyle(
+                      fontSize: 13, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 Padding(
-                  padding: EdgeInsets.only(right: 26),
+                  padding: const EdgeInsets.only(right: 26),
                   child: Text(
-                    'INR 20.00',
-                    style: TextStyle(
+                    'INR ${cartdishes.dishPrice.toInt()}.00',
+                    style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 1,
                 ),
                 Padding(
-                  padding: EdgeInsets.only(right: 24),
+                  padding: const EdgeInsets.only(right: 24),
                   child: Text(
-                    '112 Calories',
-                    style: TextStyle(fontSize: 10),
+                    '${cartdishes.dishCalories} Calories',
+                    style: const TextStyle(fontSize: 10),
                   ),
                 )
               ],
@@ -77,16 +80,17 @@ class carttile extends StatelessWidget {
           Container(
             width: 110,
             color: Colors.white,
-            child: const AddCart(),
+            child: AddCart(cartdishes),
           ),
           Container(
             width: 90,
             color: Colors.white,
-            child: const Padding(
-              padding: EdgeInsets.only(top: 10, left: 5),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 10, left: 5),
               child: Text(
-                'INR 20.00',
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                'INR ${cartdishes.dishPrice.toInt()}.00',
+                style:
+                    const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
               ),
             ),
           ),
