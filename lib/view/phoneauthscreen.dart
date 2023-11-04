@@ -26,7 +26,7 @@ class _PhoneNumberInputScreenState extends State<PhoneNumberInputScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Phone Number Verification'),
+        title: const Center(child: Text('Phone Number Verification')),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -36,7 +36,7 @@ class _PhoneNumberInputScreenState extends State<PhoneNumberInputScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               const Text(
-                'Enter your phone number to verify:',
+                'Enter your phone number with code:',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 20),
@@ -49,9 +49,13 @@ class _PhoneNumberInputScreenState extends State<PhoneNumberInputScreen> {
                     phoneNumberController, // Use a controller to capture input
                 keyboardType: TextInputType.phone,
                 validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a valid phone number';
+                  final phoneNumber = value?.trim();
+                  if (phoneNumber == null ||
+                      phoneNumber.isEmpty ||
+                      !phoneNumber.startsWith('+91')) {
+                    return 'Please enter a valid phone number with the +91 prefix.';
                   }
+
                   return null;
                 },
               ),

@@ -48,13 +48,13 @@ class Homescreen extends StatelessWidget {
                             radius: 25,
                             backgroundImage: photoURL != null
                                 ? Image.network(photoURL).image
-                                : const AssetImage(
-                                    'path_to_default_avatar_image'),
+                                : const AssetImage(''),
                             backgroundColor: Colors.white,
-                            child: const Icon(
-                              Icons.person,
-                              size: 30,
-                            ),
+                            child: Icon(Icons.person,
+                                size: 30,
+                                color: photoURL != null
+                                    ? Colors.transparent
+                                    : Colors.black),
                           ),
                         ),
                         Text(
@@ -106,7 +106,7 @@ class Homescreen extends StatelessWidget {
                             minHeight: 16,
                           ),
                           child: Obx(() => Text(
-                                '${menuController.cartdishes.length}',
+                                '${menuController.cartCounter.value}',
                                 style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 12,
