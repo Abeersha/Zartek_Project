@@ -37,7 +37,7 @@ class AddCart extends StatelessWidget {
               width: 5,
             ),
             Obx(() => Text(
-                  '${menuController.cartCounter.value}',
+                  menuController.itemCartCount(item.dishId.toString()),
                   style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,

@@ -56,8 +56,7 @@ class AuthController extends GetxController {
       smsCode: otp,
     );
     try {
-       userCredential =
-          await auth.signInWithCredential(credential);
+      userCredential = await auth.signInWithCredential(credential);
 
       Get.offAll(Homescreen(userCredential!));
     } catch (e) {

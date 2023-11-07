@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:zartek_project/controller/menucontroller.dart';
+import 'package:zartek_project/model%20/foodmenu.dart';
 import 'package:zartek_project/view/widget/carttile.dart';
 import 'package:zartek_project/view/widget/placeorder.dart';
 
@@ -49,7 +50,7 @@ class Cartpage extends StatelessWidget {
                         width: 500,
                         child: Center(
                             child: Obx(() => Text(
-                                  '${menuController.cartdishes.length} Dishes',
+                                  ' ${menuController.cartdishes.length} Dishes - ${menuController.cartdishes.toSet().length } Items ',
                                   style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white),
@@ -70,9 +71,13 @@ class Cartpage extends StatelessWidget {
                                             ? false
                                             : true,
                                     child: const Divider()),
-                                itemBuilder: (context, index) =>
-                                    carttile(controller.cartdishes[index]),
-                                itemCount: controller.cartdishes.length,
+                                itemBuilder: (context, index) {
+
+                                  // ignore: invalid_use_of_protected_member
+                                  final List<CategoryDish> s = controller.cartdishes.value.toSet().toList();
+                                    return carttile(s[index]);},
+                                // ignore: invalid_use_of_protected_member
+                                itemCount: controller.cartdishes.value.toSet().length,
                               ),
                       ),
                     ),

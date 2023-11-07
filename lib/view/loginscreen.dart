@@ -48,7 +48,7 @@ class Loginscreen extends StatelessWidget {
               buttonText: 'Phone',
               iconImage: phonelogo,
               onPressed: () {
-                Get.off(const PhoneNumberInputScreen());
+                Get.to(PhoneNumberInputScreen());
               },
               backgroundColor: const Color.fromARGB(255, 50, 202, 55),
               iconColor: Colors.green,

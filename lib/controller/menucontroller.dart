@@ -10,8 +10,11 @@ import '../model /foodmenu.dart';
 class FoodMenuController extends GetxController {
   ApiService obj = ApiService();
 
+  RxList<String> tabs = <String>[].obs;
+
   List<CategoryDish> dishes = [];
-  RxList cartdishes = [].obs;
+  RxList<CategoryDish> cartdishes = <CategoryDish>[].obs;
+  RxList<CategoryDish> filteredCartdishes = <CategoryDish>[].obs;
 
   RxInt cartCounter = 0.obs;
   RxInt totalamount = 0.obs;
@@ -26,25 +29,35 @@ class FoodMenuController extends GetxController {
 
   void cartCount(int value, String operation, CategoryDish item) {
     if (operation == '+') {
-      totalamount.value = item.dishPrice.toInt() + totalamount.value;
+      totalamount.value = item.dishPrice.toInt() + totalamount.value  ;
+
       cartdishes.add(item);
+
       cartCounter.value = value + 1;
     } else if (operation == '-' && value > 0) {
       totalamount.value = item.dishPrice.toInt() - totalamount.value;
       cartdishes.remove(item);
+
       cartCounter.value = value - 1;
     }
+    update();
   }
 
   Future<void> fetchCartDishes() async {
     try {
       object.fetchHomeDatas().then((List<Foodmenu> data) {
-        dishes = data[0].tableMenuList[0].categoryDishes;
+        for (var i in data[0].tableMenuList) {
+          tabs.add(i.menuCategory.toString());
+
+          dishes.addAll(i.categoryDishes);
+        }
+
+        // dishes = data[0].tableMenuList[0].categoryDishes;
 
         update();
       });
     } catch (e) {
-      Get.snackbar("hi", e.toString());
+      Get.snackbar("", e.toString());
     }
     update();
   }
@@ -55,5 +68,16 @@ class FoodMenuController extends GetxController {
     totalamount.value = 0;
     cartCounter.value = 0;
     Get.off(Homescreen(userCredential!));
+    update();
+  }
+
+  String itemCartCount(String id) {
+    List<CategoryDish> filteredList =
+        // ignore: invalid_use_of_protected_member
+        cartdishes.value.where((item) => item.dishId.contains(id)).toList();
+    final RxString count =
+        filteredList.isEmpty ? '0'.obs : '${filteredList.length}'.obs;
+
+    return count.value;
   }
 }

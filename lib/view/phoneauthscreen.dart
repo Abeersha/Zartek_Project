@@ -1,23 +1,16 @@
-// ignore_for_file: library_private_types_in_public_api
-
 import 'package:flutter/material.dart';
 import 'package:zartek_project/controller/phoneauthcontroller.dart';
 
-class PhoneNumberInputScreen extends StatefulWidget {
-  const PhoneNumberInputScreen({super.key});
+// ignore: must_be_immutable
+class PhoneNumberInputScreen extends StatelessWidget {
+  PhoneNumberInputScreen({Key? key}) : super(key: key);
 
-  @override
-  _PhoneNumberInputScreenState createState() => _PhoneNumberInputScreenState();
-}
-
-class _PhoneNumberInputScreenState extends State<PhoneNumberInputScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController phoneNumberController = TextEditingController();
 
   void _onVerifyPressed(BuildContext context) {
     if (_formKey.currentState!.validate()) {
-      String phoneNumber = phoneNumberController.text;
-
+      String phoneNumber = '+91${phoneNumberController.text}';
       AuthController().phoneAuth(phoneNumber);
     }
   }
@@ -44,18 +37,15 @@ class _PhoneNumberInputScreenState extends State<PhoneNumberInputScreen> {
                 decoration: const InputDecoration(
                   labelText: 'Phone Number',
                   border: OutlineInputBorder(),
+                  prefixText: '+91', // Add the prefix here
                 ),
-                controller:
-                    phoneNumberController, // Use a controller to capture input
+                controller: phoneNumberController,
                 keyboardType: TextInputType.phone,
                 validator: (value) {
                   final phoneNumber = value?.trim();
-                  if (phoneNumber == null ||
-                      phoneNumber.isEmpty ||
-                      !phoneNumber.startsWith('+91')) {
-                    return 'Please enter a valid phone number with the +91 prefix.';
+                  if (phoneNumber == null || phoneNumber.isEmpty) {
+                    return 'Please enter a valid phone number';
                   }
-
                   return null;
                 },
               ),
